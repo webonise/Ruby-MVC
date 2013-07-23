@@ -1,4 +1,5 @@
 require "surfer/version"
+require "surfer/routing"
 
 module Surfer
   class Application
