@@ -7,6 +7,9 @@ module Surfer
   		if env['PATH_INFO']=='/favicon.ico'
   			return [404,{'Content-Type'=>'text/html'},[]]
   		end
+      if env['PATH_INFO']=='/'
+        return[200,{'Content-Type'=>'text/html'},["HomePage --- But i need to wirte the actual code -- "]]
+      end
   		klass, act = get_controller_and_action(env)
   		controller = klass.new(env)
   		text = controller.send(act)
