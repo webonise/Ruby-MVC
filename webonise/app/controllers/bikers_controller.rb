@@ -1,5 +1,5 @@
 class BikersController < Surfer::Controller
-def show
-"This is a message from BikersController for you webonisers -- This will be awesome !! "
-end
+	def show
+		@data = "Instance Variable Accessed !! :P"
+	end
 end
