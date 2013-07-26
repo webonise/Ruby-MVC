@@ -6,5 +6,10 @@ module Surfer
 			# Append Controller eg : WeboniseController
 			[Object.const_get(cont+"Controller"), action, cont]
 		end
+
+		def root pth
+			puts pth
+		end
+
 	end
 end
