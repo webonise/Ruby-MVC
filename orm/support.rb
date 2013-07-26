@@ -5,7 +5,8 @@ class Support
 	# and global variable declaretion space. 
 	def get_pluralize name
 		until name.empty? 
-			str = name.downcase.concat('s')
+			 str = name.downcase.concat('s')
+			#str = name.downcase.
 			return str
 		end
 	end
@@ -26,6 +27,7 @@ class Support
 	def create_field argv
 		i = 1
 		str = ""
+		str = " id    INTEGER   AUTO_INCREMENT   PRIMARY KEY, "
 		begin
 			att = argv[i]	
 			str << att
@@ -48,15 +50,128 @@ class Support
 		return query
 	end
 
+	def generate_insert tab_name, argv
+		
+		attribute = ""
+		attribute << "id,"
+		i = 0
+		argv.each do |k,v|
+			attribute << k
+			i = i.to_i + 1
+			if i != argv.length
+				attribute << ","
+			end
+		end
 
-	def show
-
-		#puts "Enter a key."
-		#str = gets.chomp
-		#puts "value is: #{get_data_type(str)}"
-
+		val = []
+		val << "NULL"
+		i = 0
+		begin
+			val << argv[argv.keys[i]]
+			i = i.to_i + 1 		
+		end while i < argv.length.to_i		
+		query = " INSERT INTO #{tab_name}(#{attribute}) VALUES (#{val * ","}) "
+		#puts query
+		return query
 	end
 
-end
+	def generate_remove tab_name, argv
+		condition = ""
+		condition << "( "
+		i = 0
+		begin
+			if  "condition" != argv.keys[i] 
+				condition << argv.keys[i] 
+				condition << "="
+				condition << argv[argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			else
+				condition << argv[argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			end	
+		end while i < argv.length
+		condition << ")"
+		query = " DELETE FROM #{tab_name} WHERE#{condition} "
+		#puts query
+		return query
+	end
 
-#Support.new.create_table
+
+	def generate_update tab_name, argv, cond_argv
+
+
+	# Parsing updatable attribute
+		attribute = ""
+		i = 0
+		begin
+			attribute << argv.keys[i]
+			attribute << " = "
+			attribute << argv[argv.keys[i]]
+			i = i.to_i + 1
+			if i != argv.length
+				attribute << ","
+			end
+		end while i < argv.length
+
+
+	# Parsing conditional hashing argument.	
+		condition = ""
+		condition << "( "
+		i = 0
+		begin
+			if  "condition" != cond_argv.keys[i] 
+				condition << cond_argv.keys[i] 
+				condition << "="
+				condition << cond_argv[cond_argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			else
+				condition << cond_argv[cond_argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			end	
+		end while i < cond_argv.length
+		condition << ")"
+
+		query = " UPDATE #{tab_name} SET #{attribute} WHERE #{condition} "
+		puts query
+		return query
+	end
+
+
+	def generate_where tab_name, argv, att_argv
+
+
+		# Parsing conditional hashing argument.	
+		condition = ""
+		condition << "( "
+		i = 0
+		begin
+			if  "condition" != argv.keys[i] 
+				condition << argv.keys[i] 
+				condition << "="
+				condition << argv[argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			else
+				condition << argv[argv.keys[i]] 
+				condition << " "
+				i = i.to_i + 1
+			end	
+		end while i < argv.length
+		condition << ")"
+
+
+		if att_argv.length == 0
+			query = " SELECT * FROM #{tab_name} WHERE #{condition} "
+			puts query
+			return query
+		else
+			query = " SELECT #{att_argv * ","} FROM #{tab_name} WHERE #{condition} "	
+			puts query
+			return query
+		end
+	end
+end
