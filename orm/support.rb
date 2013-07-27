@@ -1,12 +1,11 @@
 #!/usr/bin/ruby
 class Support
-	# class variable
-	# instance variable
+	### class variable
+	## instance variable
 	# and global variable declaretion space. 
 	def get_pluralize name
 		until name.empty? 
 			 str = name.downcase.concat('s')
-			#str = name.downcase.
 			return str
 		end
 	end
@@ -174,4 +173,29 @@ class Support
 			return query
 		end
 	end
+
+	#a
+	def generate_join tab_name, argv
+
+		query = " SELECT #{tab_name}.* FROM #{tab_name} #{argv} "
+		puts query
+		return query
+
+	end 
+
+	def generate_index tab_name, argv
+
+		query = " CREATE INDEX #{argv[argv.keys[0]]}  ON #{tab_name} (#{argv[argv.keys[1]]}) "
+		puts query
+		return query
+	end
+	
+
+	def generate_dindex tab_name,argv
+		query = " ALTER TABLE #{tab_name} DROP INDEX #{argv[argv.keys[0]]} "
+		puts query
+		return query
+
+	end
+
 end
