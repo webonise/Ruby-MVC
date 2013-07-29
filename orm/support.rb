@@ -1,14 +1,13 @@
 #!/usr/bin/ruby
 class Support
-	### class variable
-	## instance variable
-	# and global variable declaretion space. 
+	
 	def get_pluralize name
 		until name.empty? 
 			 str = name.downcase.concat('s')
 			return str
 		end
 	end
+
 
 	def get_data_type key
 		data_type = Hash.new 
@@ -18,10 +17,10 @@ class Support
 		data_type["integer"] = "INTEGER" 
 		data_type["text"] = "TEXT" 
 		data_type["date"] = "DATE" 
-		#data_type[""] = 
 		 
 		tdata = data_type[key]
 	end
+
 
 	def create_field argv
 		i = 1
@@ -44,13 +43,17 @@ class Support
 		end while i < argv.length.to_i
 	end
 
+
 	def create_table argv 
 		query = "CREATE TABLE #{get_pluralize(argv[0])}( #{create_field(argv)} )"
+		puts query
 		return query
 	end
 
+
 	def generate_insert tab_name, argv
 		
+				# Attribute of table.
 		attribute = ""
 		attribute << "id,"
 		i = 0
@@ -61,7 +64,7 @@ class Support
 				attribute << ","
 			end
 		end
-
+				# Values of the Attributes.
 		val = []
 		val << "NULL"
 		i = 0
@@ -73,6 +76,7 @@ class Support
 		#puts query
 		return query
 	end
+
 
 	def generate_remove tab_name, argv
 		condition = ""
@@ -120,7 +124,7 @@ class Support
 		condition << "( "
 		i = 0
 		begin
-			if  "condition" != cond_argv.keys[i] 
+			if "condition" != cond_argv.keys[i] 
 				condition << cond_argv.keys[i] 
 				condition << "="
 				condition << cond_argv[cond_argv.keys[i]] 
@@ -143,12 +147,12 @@ class Support
 	def generate_where tab_name, argv, att_argv
 
 
-		# Parsing conditional hashing argument.	
+				# Parsing conditional hashing argument.	
 		condition = ""
 		condition << "( "
 		i = 0
 		begin
-			if  "condition" != argv.keys[i] 
+			if "condition" != argv.keys[i] 
 				condition << argv.keys[i] 
 				condition << "="
 				condition << argv[argv.keys[i]] 
