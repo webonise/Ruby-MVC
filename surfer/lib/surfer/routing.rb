@@ -9,7 +9,7 @@ module Surfer
 			route =  @@routes_controller.select{|f| f[:path] == "#{cont}"}
 			puts route.empty?
 			if(route.empty?)
-				return ["0","0","0"]
+				return ["no_such_path","0","0"]
 			else
 				cn = route[0]
 				puts cn[:path]
@@ -23,7 +23,7 @@ module Surfer
 					action=cn[:action]
 				end
 				if(action!=cn[:action])
-					return ["0","0","0"]
+					return ["0","no_such_action","0"]
 				end
 
 				# Append Controller eg : WeboniseController

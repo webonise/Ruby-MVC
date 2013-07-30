@@ -2,10 +2,15 @@ require "surfer"
 
 $LOAD_PATH << File.join(File.dirname(__FILE__),"..", "app","controllers")
 
-ROOT_PATH = `pwd`
+root_pth= `pwd`
+root_pth=root_pth.gsub(/[\s|\n]/,"")
+ROOT_PATH = root_pth
+
+
 
 module Webonise
 	class Application < Surfer::Application
 	end
 end
-load "/home/webonise/Projects/github/Ruby-MVC/Ruby-MVC/webonise/config/routes.rb"
+
+load "#{ROOT_PATH}/config/routes.rb"
