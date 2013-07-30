@@ -22,19 +22,19 @@ class CreateSkeleton
 		def write_database_file
 			FileUtils.cd "config"
 			file = File.open("database.yml", "w+")
-			file.write "# MySQL.  Versions 4.1 and 5.0 are recommended.\n"
-			file.write "#\n"
-			file.write "# Install the MYSQL driver\n"
-			file.write "#   gem install mysql2\n"
-			file.write "#\n"
-			file.write "development:\n"
-			file.write "  adapter: \n"
-			file.write "  encoding: \n"
-			file.write "  database: \n"
-			file.write "  pool: \n"
-			file.write "  username: \n"
-			file.write "  password: \n"
-			file.write "  socket: \n"
+			file.puts "# MySQL.  Versions 4.1 and 5.0 are recommended."
+			file.puts "#"
+			file.puts "# Install the MYSQL driver"
+			file.puts "#   gem install mysql2"
+			file.puts "#"
+			file.puts "development:"
+			file.puts "  adapter: "
+			file.puts "  encoding: utf8"
+			file.puts "  database: "
+			file.puts "  pool: 5"
+			file.puts "  username: "
+			file.puts "  password: "
+			file.puts "  socket: "
 			file.close()
 		end
 
