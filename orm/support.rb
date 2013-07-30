@@ -144,7 +144,7 @@ class Support
 	end
 
 
-	def generate_where tab_name, argv, att_argv
+	def generate_where tab_name, argv #, att_argv
 
 
 				# Parsing conditional hashing argument.	
@@ -167,15 +167,15 @@ class Support
 		condition << ")"
 
 
-		if att_argv.length == 0
+		#if att_argv.length == 0
 			query = " SELECT * FROM #{tab_name} WHERE #{condition} "
 			puts query
 			return query
-		else
-			query = " SELECT #{att_argv * ","} FROM #{tab_name} WHERE #{condition} "	
-			puts query
-			return query
-		end
+		#else
+			#query = " SELECT #{att_argv * ","} FROM #{tab_name} WHERE #{condition} "	
+			#puts query
+			#return query
+		#end
 	end
 
 	#a
