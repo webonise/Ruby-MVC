@@ -15,6 +15,9 @@ module Surfer
 				puts cn[:path]
 				puts cn[:controller]
 				puts cn[:action]
+				autoload="#{cont}_controller"
+				puts autoload
+				require "#{autoload}"
 				cont = cont.capitalize # Capitalize Controller eg : Webonise
 				if(action.nil?)
 					action=cn[:action]
@@ -22,6 +25,7 @@ module Surfer
 				if(action!=cn[:action])
 					return ["0","0","0"]
 				end
+
 				# Append Controller eg : WeboniseController
 				[Object.const_get(cont+"Controller"), action, cont]
 			end
