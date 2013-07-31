@@ -13,7 +13,6 @@ module Surfer
 
     def render
       pth=ROOT_PATH+"/app/views/#{@resource}/#{@action}.html.erb"
-      pth=pth.gsub(/[\s|\n]/,"")
       puts pth
       content = File.read(pth)
       eruby = Erubis::Eruby.new(content)

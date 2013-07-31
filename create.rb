@@ -57,6 +57,7 @@ class CreateSkeleton
 			file.puts '	end'
 			file.puts 'end'+"\n\n"
 			file.puts 'load "#{ROOT_PATH}/config/routes.rb"'
+			file.close()
 		end
 
 		def write_routes_file str
@@ -64,13 +65,13 @@ class CreateSkeleton
 			file.puts "#{str}::Application.routing_config do |app|"
 			file.puts "	# This is the file where you make all the routing configuratons"
 			file.puts '	# You can have the root of your site routed with "root"'
-  		file.puts '	# by default it is public/index.html.'
-  		file.puts '	# app.root "computers#show"'+"\n\n"
-  		file.puts "	# Sample Get Request"
-  		file.puts '		# app.get path: "path", controller: "controller_name", action: "action_name"'
-  		file.puts '		# eg: app.get path: "bikers", controller: "Bikers", action: "index"'
+  			file.puts '	# by default it is public/index.html.'
+  			file.puts '	# app.root "computers#show"'+"\n\n"
+  			file.puts "	# Sample Get Request"
+  			file.puts '		# app.get path: "path", controller: "controller_name", action: "action_name"'
+  			file.puts '		# eg: app.get path: "bikers", controller: "Bikers", action: "index"'
 			file.puts 'end'
-
+			file.close()
 
 		end
 
@@ -81,6 +82,7 @@ class CreateSkeleton
 			file = File.open("config.ru", "w+")
 			file.puts "require ::File.expand_path('../config/application',__FILE__)"
 			file.puts "run #{str}::Application.new"
+			file.close()
 		end
 
 		def write_gem_file
