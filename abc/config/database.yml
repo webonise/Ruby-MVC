@@ -1,0 +1,13 @@
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+#
+# Install the MYSQL driver
+#   gem install mysql2
+#
+development:
+  adapter: mysql
+  encoding: 
+  database: model
+  pool: 
+  username: root
+  password: webonise6186
+  socket: 

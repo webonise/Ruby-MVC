@@ -2,6 +2,9 @@ require "surfer/version"
 require "surfer/routing"
 require "surfer/controller"
 require "erubis"
+require "dbi"
+require "mysql"
+require "surfer/operation"
 
 module Surfer
   

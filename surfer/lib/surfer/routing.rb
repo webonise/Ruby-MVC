@@ -1,5 +1,4 @@
 module Surfer
-
 	class Application
 		@@routes_controller=[]
 		def get_controller_and_action(env)
@@ -12,13 +11,13 @@ module Surfer
 				return ["no_such_path","0","0"]
 			else
 				cn = route[0]
-				puts cn[:path]
-				puts cn[:controller]
-				puts cn[:action]
-				autoload="#{cont}_controller"
-				puts autoload
+				puts "Requested Path = #{cn[:path]}"
+				puts "Controller Called #{cn[:controller]}"
+				puts "Action called #{cn[:action]}"
+				autoload="#{cn[:controller]}_controller"
+				puts "Controller FIle #{autoload}"
 				require "#{autoload}"
-				cont = cont.capitalize # Capitalize Controller eg : Webonise
+				cont = cn[:controller].capitalize # Capitalize Controller eg : Webonise
 				if(action.nil?)
 					action=cn[:action]
 				end

@@ -20,9 +20,17 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "erubis"
+
+  spec.add_development_dependency "mysql"
+  spec.add_development_dependency "dbi"
+  spec.add_development_dependency "dbd-mysql"
+
   spec.add_runtime_dependency "rack"
   spec.add_runtime_dependency "erubis"
-  spec.add_development_dependency "erubis"
-  spec.add_development_dependency "dbi"
-  spec.add_development_dependency "mysql"
+  spec.add_runtime_dependency "mysql"
+  spec.add_runtime_dependency "dbi"
+  spec.add_runtime_dependency "dbd-mysql"
+
+  
 end
