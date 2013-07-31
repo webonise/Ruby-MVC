@@ -9,13 +9,12 @@ class Operation
 	SUPPORT = Support.new
 	@args
 
-	def initialize(arg)
-		@args = Hash.new(arg)
+	def initialize(arg={})
 		self.class.set_columns
 		arg.each do |a, v|
 			eval("self.#{a} = #{v}")
 		end
-		puts self.id
+		@args = Hash.new(arg)
 	end
 
 	
@@ -35,17 +34,15 @@ class Operation
 	end
 
 
-	def self.all attribute
+	def self.all attribute = {}
 		puts attribute.inspect
 		objects = []
 		table_name = SUPPORT.get_pluralize( "#{self.name}" )
 		begin
 			if attribute.empty?
 				record = CONN.prepare( " SELECT * FROM #{table_name} " )
-				puts " Hello "
 			else
 				record = CONN.prepare( " SELECT #{attribute} FROM #{table_name} " )
-				puts " Hi "
 			end
 			record.execute()
 			@columns = record.column_names
@@ -84,7 +81,6 @@ class Operation
 			puts "Error message : #{e.errstr}"	
 			CONN.rollback
 		else
-			#puts "#{self.id}"
 			puts " Record inserted successfully. "
 		end
 	end
@@ -92,7 +88,12 @@ class Operation
 
 	def update argv
 		table_name = SUPPORT.get_pluralize( "#{self.class}" )
-		query = SUPPORT.generate_update( table_name, argv, "id" => "#{self.id[0]}" )
+		if self.id != nil
+			query = SUPPORT.generate_update( table_name, argv, "id" => "#{self.id[0]}" )
+		else 
+			puts " Record does not persist in database. "
+			return
+		end	
 
 		begin
 			CONN.do(query)
@@ -109,7 +110,12 @@ class Operation
 
 	def remove
 		table_name = SUPPORT.get_pluralize( "#{self.class}" )
-		query = SUPPORT.generate_remove( table_name, "id" => "#{self.id[0]}" ) 
+		if self.id != nil
+			query = SUPPORT.generate_remove( table_name, "id" => "#{self.id[0]}" ) 
+		else 
+			puts " Record does not persist in database. "
+			return
+		end		
 		puts query
 		begin
 			if CONN.do(query) == 1

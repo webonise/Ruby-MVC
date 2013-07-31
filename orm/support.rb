@@ -52,12 +52,15 @@ class Support
 
 
 	def generate_insert tab_name, argv
-		
+
 				# Attribute of table.
 		attribute = ""
-		attribute << "id,"
+		attribute << "id"
 		i = 0
 		argv.each do |k,v|
+			if i == 0 and argv.length != 0
+				attribute << ","
+			end
 			attribute << k
 			i = i.to_i + 1
 			if i != argv.length
@@ -72,9 +75,14 @@ class Support
 			val << argv[argv.keys[i]]
 			i = i.to_i + 1 		
 		end while i < argv.length.to_i		
-		query = " INSERT INTO #{tab_name}(#{attribute}) VALUES (#{val * ","}) "
-		#puts query
-		return query
+
+		if argv.length == 0
+			query = " INSERT INTO #{tab_name}(#{attribute}) VALUES (#{val * ""}) "
+			return query
+		else
+			query = " INSERT INTO #{tab_name}(#{attribute}) VALUES (#{val * ","}) "
+			return query
+		end
 	end
 
 
