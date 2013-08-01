@@ -76,6 +76,10 @@ module Surfer
       return[200,{'Content-Type'=>'text/html'},[content]]
     end
 
+    def self.display arg
+      "Hello #{arg}"
+    end
+
 
 
   end #end of Class

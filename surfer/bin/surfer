@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'surfer'
+puts Surfer::Application.display(ARGV[0])

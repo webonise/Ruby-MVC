@@ -1,6 +1,8 @@
-#!/usr/bin/ruby
+module Surfer
 class Support
 	
+													# Plural method for pluralization purpose.
+
 	def get_pluralize name
 		until name.empty? 
 			 str = name.downcase.concat('s')
@@ -8,6 +10,7 @@ class Support
 		end
 	end
 
+												# Getting sql specific datatype.
 
 	def get_data_type key
 		data_type = Hash.new 
@@ -21,6 +24,7 @@ class Support
 		tdata = data_type[key]
 	end
 
+											# Parsing command line argument for table creating.
 
 	def create_field argv
 		i = 1
@@ -43,6 +47,7 @@ class Support
 		end while i < argv.length.to_i
 	end
 
+													# Table creation query.
 
 	def create_table argv 
 		query = "CREATE TABLE #{get_pluralize(argv[0])}( #{create_field(argv)} )"
@@ -50,6 +55,7 @@ class Support
 		return query
 	end
 
+													# Parsing insert command attribute.
 
 	def generate_insert tab_name, argv
 
@@ -59,8 +65,8 @@ class Support
 		i = 0
 		argv.each do |k,v|
 			if i == 0 and argv.length != 0
-				attribute << ","
-			end
+			 	attribute << ","
+			 end
 			attribute << k
 			i = i.to_i + 1
 			if i != argv.length
@@ -72,7 +78,7 @@ class Support
 		val << "NULL"
 		i = 0
 		begin
-			val << argv[argv.keys[i]]
+			val << "\"#{argv[argv.keys[i]]}\""
 			i = i.to_i + 1 		
 		end while i < argv.length.to_i		
 
@@ -85,6 +91,7 @@ class Support
 		end
 	end
 
+															# Parsing coditional parameter for delete command.
 
 	def generate_remove tab_name, argv
 		condition = ""
@@ -94,7 +101,7 @@ class Support
 			if  "condition" != argv.keys[i] 
 				condition << argv.keys[i] 
 				condition << "="
-				condition << argv[argv.keys[i]] 
+				condition << "\"#{argv[argv.keys[i]]}\"" 
 				condition << " "
 				i = i.to_i + 1
 			else
@@ -109,9 +116,9 @@ class Support
 		return query
 	end
 
+														# Parsing attributes and values for update command.
 
 	def generate_update tab_name, argv, cond_argv
-
 
 	# Parsing updatable attribute
 		attribute = ""
@@ -119,7 +126,7 @@ class Support
 		begin
 			attribute << argv.keys[i]
 			attribute << " = "
-			attribute << argv[argv.keys[i]]
+			attribute << "\"#{argv[argv.keys[i]]}\""
 			i = i.to_i + 1
 			if i != argv.length
 				attribute << ","
@@ -151,6 +158,7 @@ class Support
 		return query
 	end
 
+															# Parsing attribute for where clouse.
 
 	def generate_where tab_name, argv #, att_argv
 
@@ -163,7 +171,7 @@ class Support
 			if "condition" != argv.keys[i] 
 				condition << argv.keys[i] 
 				condition << "="
-				condition << argv[argv.keys[i]] 
+				condition << "\"#{argv[argv.keys[i]]}\""
 				condition << " "
 				i = i.to_i + 1
 			else
@@ -186,28 +194,20 @@ class Support
 		#end
 	end
 
-	#a
-	def generate_join tab_name, argv
-
-		query = " SELECT #{tab_name}.* FROM #{tab_name} #{argv} "
-		puts query
-		return query
-
-	end 
+																# Generating the index command.
 
 	def generate_index tab_name, argv
-
 		query = " CREATE INDEX #{argv[argv.keys[0]]}  ON #{tab_name} (#{argv[argv.keys[1]]}) "
 		puts query
 		return query
 	end
 	
-
+															# # Generating the index deletion command.
 	def generate_dindex tab_name,argv
 		query = " ALTER TABLE #{tab_name} DROP INDEX #{argv[argv.keys[0]]} "
 		puts query
 		return query
-
 	end
 
+end
 end
