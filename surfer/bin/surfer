@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 require 'surfer'
-puts Surfer::Application.display(ARGV[0])
+if (ARGV[0]=="new" && ARGV.length==2)
+	directory_structure=Surfer::CreateSkeleton.new()
+	directory_structure.generate(ARGV[1])
+	# puts Surfer::Application.display(ARGV[0])
+else
+	Surfer::Options.all_opitons
+end

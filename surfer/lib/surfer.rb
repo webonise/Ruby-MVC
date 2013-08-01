@@ -5,6 +5,8 @@ require "erubis"
 require "dbi"
 require "mysql"
 require "surfer/operation"
+require "surfer/create"
+require "surfer/options"
 
 module Surfer
   

@@ -2,10 +2,10 @@ module Surfer
 	require ::File.expand_path('../connection',__FILE__)
 	require ::File.expand_path('../support',__FILE__)
 	class Operation
-	@@columns = nil
-	CONN = Connection.new.create_connection
-	SUPPORT = Support.new
-	@args
+	# @@columns = nil
+	# CONN = Connection.new.create_connection
+	# SUPPORT = Support.new
+	# @args
 
 																		# initializer method. 
 	def initialize(arg={})

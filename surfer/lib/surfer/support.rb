@@ -142,11 +142,11 @@ class Support
 			if "condition" != cond_argv.keys[i] 
 				condition << cond_argv.keys[i] 
 				condition << "="
-				condition << cond_argv[cond_argv.keys[i]] 
+				condition << "\"#{cond_argv[cond_argv.keys[i]]}\"" 
 				condition << " "
 				i = i.to_i + 1
 			else
-				condition << cond_argv[cond_argv.keys[i]] 
+				condition << "\"#{cond_argv[cond_argv.keys[i]]}\""
 				condition << " "
 				i = i.to_i + 1
 			end	
