@@ -27,7 +27,7 @@ class Support
 											# Parsing command line argument for table creating.
 
 	def create_field argv
-		i = 1
+		i = 3
 		str = ""
 		str = " id    INTEGER   AUTO_INCREMENT   PRIMARY KEY, "
 		begin
@@ -50,7 +50,7 @@ class Support
 													# Table creation query.
 
 	def create_table argv 
-		query = "CREATE TABLE #{get_pluralize(argv[0])}( #{create_field(argv)} )"
+		query = "CREATE TABLE #{get_pluralize(argv[2])}( #{create_field(argv)} )"
 		puts query
 		return query
 	end
@@ -77,10 +77,12 @@ class Support
 		val = []
 		val << "NULL"
 		i = 0
-		begin
-			val << "\"#{argv[argv.keys[i]]}\""
-			i = i.to_i + 1 		
-		end while i < argv.length.to_i		
+		if argv.length != 0
+			begin
+				val << "\"#{argv[argv.keys[i]]}\""
+				i = i.to_i + 1 		
+			end while i < argv.length.to_i	
+		end		
 
 		if argv.length == 0
 			query = " INSERT INTO #{tab_name}(#{attribute}) VALUES (#{val * ""}) "
@@ -105,7 +107,7 @@ class Support
 				condition << " "
 				i = i.to_i + 1
 			else
-				condition << argv[argv.keys[i]] 
+				condition << "\"#{argv[argv.keys[i]]}\"" 
 				condition << " "
 				i = i.to_i + 1
 			end	
@@ -146,7 +148,7 @@ class Support
 				condition << " "
 				i = i.to_i + 1
 			else
-				condition << "\"#{cond_argv[cond_argv.keys[i]]}\""
+				condition << "\"#{cond_argv[cond_argv.keys[i]]}\"" 
 				condition << " "
 				i = i.to_i + 1
 			end	
@@ -175,7 +177,7 @@ class Support
 				condition << " "
 				i = i.to_i + 1
 			else
-				condition << argv[argv.keys[i]] 
+				condition << "\"#{argv[argv.keys[i]]}\""
 				condition << " "
 				i = i.to_i + 1
 			end	
@@ -210,4 +212,5 @@ class Support
 	end
 
 end
+
 end

@@ -7,6 +7,7 @@ require "mysql"
 require "surfer/operation"
 require "surfer/create"
 require "surfer/options"
+require "surfer/generator"
 
 module Surfer
   
@@ -61,7 +62,7 @@ module Surfer
       action =@@default_path[1]
       autoload="#{cont}_controller"
       puts autoload
-      require "#{autoload}"
+      # require "#{autoload}"
       cont = cont.capitalize
       [Object.const_get(cont+"Controller"), action, cont]
     end

@@ -4,6 +4,13 @@ if (ARGV[0]=="new" && ARGV.length==2)
 	directory_structure=Surfer::CreateSkeleton.new()
 	directory_structure.generate(ARGV[1])
 	# puts Surfer::Application.display(ARGV[0])
+elsif(ARGV[0].downcase=="generate" && ARGV[1].downcase=="model")
+	model=Surfer::Generate.new()
+	model.create(ARGV)
+elsif(ARGV[0].downcase=="generate"  && ARGV[1].downcase=="controller")
+	controller=Surfer::Generate.new()
+	controller.create_controller_files(ARGV[2])
 else
 	Surfer::Options.all_opitons
 end
+

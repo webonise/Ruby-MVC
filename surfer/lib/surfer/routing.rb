@@ -15,8 +15,8 @@ module Surfer
 				puts "Controller Called #{cn[:controller]}"
 				puts "Action called #{cn[:action]}"
 				autoload="#{cn[:controller]}_controller"
-				puts "Controller FIle #{autoload}"
-				require "#{autoload}"
+				# puts "Controller FIle #{autoload}"
+				# require "#{autoload}"
 				cont = cn[:controller].capitalize # Capitalize Controller eg : Webonise
 				if(action.nil?)
 					action=cn[:action]
