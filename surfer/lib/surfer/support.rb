@@ -15,6 +15,7 @@ class Support
 	def get_data_type key
 		data_type = Hash.new 
 		data_type["int"] = "INTEGER"
+		data_type["mobile"] = "BIGINT(20)"
 		data_type["string"] = "VARCHAR(50)"
 		data_type["float"] = "INTEGER(20,5)" 
 		data_type["integer"] = "INTEGER" 

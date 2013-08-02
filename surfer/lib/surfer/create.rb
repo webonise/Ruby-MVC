@@ -45,6 +45,7 @@ class CreateSkeleton
 	end
 
 	def write_application_file str		
+		str.capitalize!
 		file = File.open("application.rb", "w+")
 		file.puts 'require "surfer"'+"\n\n"
 		file.puts "require 'fileutils'\n"
@@ -77,6 +78,7 @@ class CreateSkeleton
 
 	def write_config_file str
 		#puts `pwd`
+		str.capitalize!
 		FileUtils.chdir "../"
 		# puts `pwd`
 		file = File.open("config.ru", "w+")
@@ -92,20 +94,31 @@ class CreateSkeleton
 		file.close()
 	end
 
+	def write_html_pages(app_name)
+		FileUtils.cd "public"
+		file = File.open("index.html", "w+")
+		file.puts "<h1 align=\"center\">Home Page of #{app_name}</h1>"
+		file.close()
+		file = File.open("page_not_found.html", "w+")
+		file.puts "<h1 align=\"center\"> 404 </h1>}"
+		file.puts "<h3 align=\"center\">Sorry -- Page Not Found</h3>"
+		file.puts "<h4 align=\"center\">Please Check routes.rb for routing mismatch</h3>"
+		file.close()
+	end
+
 	def generate app_name
-		# making = CreateSkeleton.new
-		# puts " Enter the Application name."
+	
 		app_name=app_name.gsub(/\s/,'')
 		if app_name.nil?
   			puts " Application name is empty. "
 		else
 			create_folder(app_name)
-			puts app_name.capitalize!
 			write_database_file
 			write_application_file(app_name)
 			write_routes_file(app_name)
 			write_config_file(app_name)
 			write_gem_file
+			write_html_pages(app_name)
 			dir = `pwd`
 			cmd = "cd #{dir} && bundle install".gsub(/\n/,"") 
 			exec cmd

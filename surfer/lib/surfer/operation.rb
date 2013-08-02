@@ -3,7 +3,7 @@ module Surfer
 	require ::File.expand_path('../support',__FILE__)
 	
 	class Operation
-		@@columns = nil
+		# @@columns = nil
 		CONNECTION = Connection.new
 		SUPPORT = Support.new
 		@conn = nil
@@ -11,7 +11,7 @@ module Surfer
 																			# initializer method. 
 
 		def initialize(arg={})
-			self.class.set_columns
+			puts self.class
 			arg.each do |a, v|
 				puts "a = #{a}    p = #{v}"
 				self.send("#{a}=", v)
@@ -42,7 +42,6 @@ module Surfer
 																	# select All with attribute and without attribute command.
 
 		def self.all attribute = {}
-			set_columns
 			objects = []
 			table_name = SUPPORT.get_pluralize( "#{self.name}" )
 			begin
@@ -163,7 +162,6 @@ module Surfer
 																				# Where clouse.
 
 		def self.where argv
-			set_columns
 			table_name = SUPPORT.get_pluralize( "#{self.name}" )
 			query = SUPPORT.generate_where( table_name, argv )
 			begin
@@ -247,15 +245,18 @@ module Surfer
 																					# Loading Table column from database.
 
 		def self.set_columns
-			unless @@columns
+			puts "*" * 100
+			puts self.inspect
+			unless columns
 				table_name = SUPPORT.get_pluralize(self.name)
 				begin
 					if @conn == nil 
 						@conn = CONNECTION.create_connection
 						record = @conn.prepare( " select * from #{table_name} " )
 						record.execute()
-						@@columns = record.column_names
-						set_accessor(self, @@columns )
+						puts "inside setcoloums #{self.name}"
+						self.class_variable_set(:@@columns,record.column_names)
+						set_accessor(self, columns )
 					end
 				rescue DBI::DatabaseError => e
 					puts "Error code : #{e.err}"
@@ -266,7 +267,7 @@ module Surfer
 					end				
 				end			
 			end
-			@@columns
+			columns
 		end
 
 																					# Setting Attribute accessor.
@@ -281,7 +282,7 @@ module Surfer
 
 																				# setting column accessor. 
 		def self.columns
-			@@columns
+			self.class_variable_get(:@@columns) rescue nil
 		end
 		
 	end

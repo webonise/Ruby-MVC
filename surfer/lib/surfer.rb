@@ -47,7 +47,7 @@ module Surfer
 
 
     def self.routing_config
-      puts "Inside routing_congig"
+      puts "Inside routing_config"
       yield(self)
     end
 

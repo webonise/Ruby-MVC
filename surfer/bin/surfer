@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'surfer'
 if (ARGV[0]=="new" && ARGV.length==2)
+	puts AGRV.length
 	directory_structure=Surfer::CreateSkeleton.new()
 	directory_structure.generate(ARGV[1])
 	# puts Surfer::Application.display(ARGV[0])
