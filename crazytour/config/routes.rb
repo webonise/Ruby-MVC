@@ -6,6 +6,10 @@ Crazytour::Application.routing_config do |app|
 
 	# Sample Get Request
 		# app.get path: "path", controller: "controller_name", action: "action_name"
-		app.get path: "places", controller: "guides", action: "index"
-		app.get path: "guides", controller: "guides", action: "show_guides"
+		app.get path: "post_review", controller: "places", action: "post_review"
+		app.get path: "create_place", controller: "places", action: "create_place"
+		app.get path: "create_guide", controller: "guides", action: "create_guide"
+		app.get path: "show_guides", controller:"guides",action:"show_guides"
+		app.get path: "show_place", controller:"places", action: "show_place" 
+		
 end

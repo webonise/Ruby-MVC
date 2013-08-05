@@ -10,6 +10,9 @@ elsif(ARGV[0].downcase=="generate" && ARGV[1].downcase=="model")
 elsif(ARGV[0].downcase=="generate"  && ARGV[1].downcase=="controller")
 	controller=Surfer::Generate.new()
 	controller.create_controller_files(ARGV[2])
+elsif(ARGV[0].downcase=="run")
+		puts "Server Running at localhost:3005\n"
+		`rackup -p 3005`
 else
 	Surfer::Options.all_opitons
 end
