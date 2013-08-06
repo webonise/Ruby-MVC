@@ -6,10 +6,10 @@ require 'surfer/version'
 Gem::Specification.new do |spec|
   spec.name          = "surfer"
   spec.version       = Surfer::VERSION
-  spec.authors       = ["AdityaKamatar","Mohit Singh"]
-  spec.email         = ["aditya.kamatar@weboniselab.com","mohit.singh@weboniselab.com"]
-  spec.description   = "This is a Ruby-MVC Framework"
-  spec.summary       = "Ruby-MVC"
+  spec.authors       = ["Aditya Kamatar","Mohit Singh"]
+  spec.email         = ["adityakamatar@gmail.com","cmohitsingh.chauhan@gmail.com"]
+  spec.description   = "This is a Ruby-MVC Framework Which has all the necessary modules to build up a basic web application"
+  spec.summary       = "Ruby-MVC Framework"
   spec.homepage      = ""
   spec.license       = "MIT"
 

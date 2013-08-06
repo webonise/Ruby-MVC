@@ -57,8 +57,12 @@ class Generate
 			file = File.open("index.html.erb", "w+")
 			file.write "#{controller_class}sController index Action"
 			file.close()
+		else
+			FileUtils.cd "#{controller_name}s"
+			file = File.open("index.html.erb", "w+")
+			file.write "#{controller_class}sController index Action"
+			file.close()
 		end
-
 	end
 end
 end

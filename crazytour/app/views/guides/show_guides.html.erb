@@ -1,10 +1,34 @@
-GuidesController show_guides Action
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All Guides</title>
+</head>
+<body background="http://www.scannellconstruction.com/wp-content/uploads/2013/01/abackground2.jpg">
+<h1 align="center">Here You go .. Pick Your Guide</h1>
+<table align="center">
+	<% for guide in @guides %>
+	<tr>
+		<td>First Name :</td>
+		<td><%=guide.fname%></td>
+	</tr>
+	<tr>
+		<td>Last Name :</td>
+		<td><%=guide.lname%></td>
+	</tr>
+	<tr>
+		<td>Mobile No :</td>
+		<td><%=guide.contact_no%></td>
+	</tr>
+	<tr>
+		<td>Address :</td>
+		<td><%=guide.address%></td>
+	</tr>
+	<tr>
+		<td>*******************</td>
+		<td>*******************</td>
+	</tr>
+	<% end %>
 
-<h3>Distance From Pune</h3>
-<% for gude in @guide %>
-Name     :<%= gude.fname %></br>
-location :<%= gude.lname %></br>
-type     :<%= gude.contact_no %></br>
-Distance :<%= gude.address%></br>
-<p>xxxxxxxxxxxxxxxxxxxxxxx</p></br>
-<% end %>
+</table>
+</body>
+</html>

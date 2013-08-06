@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Places</title>
+</head>
+<body background="http://www.scannellconstruction.com/wp-content/uploads/2013/01/abackground2.jpg">
+<h1 align="center">Greate Places Waiting for you to explaore</h1>
+<table align="center">
+	<% for place in @place %>
+		<tr>
+			<td>Name :</td>
+			<td><%=place.name%></td>
+		</tr>
+		<tr>
+			<td>Location:</td>
+			<td><%=place.location%></td>
+		</tr>
+		<tr>
+			<td>Type:</td>
+			<td><%=place.type%></td>
+		</tr>
+		<tr>
+			<td>Distance:</td>
+			<td><%=place.distance%></td>
+		</tr>
+		<tr ><td> - - - - - - - - Comments - - - - - - - -<% for review in @reviews %>
+				<%if place.id==review.place_id %>
+					<table>
+						<tr>
+							<td>Name :</td>
+							<td><%= review.fname %></td>
+						</tr>
+						<tr>
+							<td>Comment :</td>
+							<td><%= review.comment %></td>
+						</tr>
+					</table>
+				<% end %>
+			<% end %></td></tr>
+		<tr>
+		<td>*******************</td>
+		<td>*******************</td>
+	</tr>
+	<% end %>
+</table>
+</body>
+</html>
